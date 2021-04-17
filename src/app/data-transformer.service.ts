@@ -60,7 +60,24 @@ export class DataTransformerService {
     });
   }
 
-  prepareConfigForChart(countryData: any[]){
+  prepareConfigForPieChart(countryData: any[]){
+    const data = countryData.map((day: any)=>{
+      return {
+        day: day.day,
+        newCases: day.newCases,
+        totalCases: day.totalCases,
+        totalDeaths: day.totalDeaths,
+        totalRecovered: day.totalRecovered,
+      }
+    });
+    return {
+      data: data,
+      labels: ['New cases', 'Total cases', 'Total deaths', 'Total recovered'],
+      ready: true,
+    }
+  }
+
+  prepareConfigForLineChart(countryData: any[]){
     const newCases: number[] = [];
     const totalCases: number[] = [];
     const totalDeaths: number[] = [];

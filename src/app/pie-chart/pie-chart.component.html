@@ -1,1 +1,9 @@
-<p>pie-chart works!</p>
+<div style="display: block;">
+    <canvas baseChart width="1800" height="800"
+      [data]="config.pieChartData"
+      [labels]="config.pieChartLabels"
+      [options]="config.pieChartOptions"
+      [colors]="config.pieChartColors"
+      [chartType]="'pie'">
+    </canvas>
+</div>
