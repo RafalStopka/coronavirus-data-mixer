@@ -13,6 +13,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChartsModule } from 'ng2-charts';
 import { LineChartComponent } from './line-chart/line-chart.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
 import 'chartjs-plugin-zoom';
 
@@ -32,7 +33,8 @@ import 'chartjs-plugin-zoom';
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
