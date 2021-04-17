@@ -1,0 +1,24 @@
+<div class='country-list-wrapper'>
+    <div *ngFor="let country of countryList" class='country-list-item'>
+        <div class='country-danger' [ngStyle]="{
+            'background-color': getDangerColor(country.infectionRisk)
+        }"><fa-icon [icon]="icon"></fa-icon></div>
+        <div class='country-data-wrapper'>
+            <div class='country-flag-wrapper'>
+                <img [src]="getImageURL(country.ISO)">
+            </div>
+            <h2>{{country.name}}</h2>
+            <h4>Population: {{country.population}}</h4>
+            <h4>Active cases: {{country.activeCases}}</h4>
+            <p>Total cases: {{country.totalCases}}</p>
+            <p>Total deaths: {{country.totalDeaths}}</p>
+            <p>Total recoveries: {{country.totalRecovered}}</p>
+            <p>Total tests: {{country.totalTests}}</p>
+            <a class='country-details' [routerLink]="['/country', country.name]"
+             [ngStyle]="{
+                'background-color': getDangerColor(country.infectionRisk)
+            }"
+            >See details</a>
+        </div>
+    </div>
+</div>
