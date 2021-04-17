@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Jockey+One&display=swap');
+
+$font: 'Jockey One', sans-serif;
+$basic-font-size: 1.3em;
+@mixin items-grid{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+@mixin items-flex{
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: flex-end;
+}
+@mixin set-padding-margin($padding, $margin){
+    padding: $padding;
+    margin: $margin;
+}
+
+.country-list-wrapper{
+    font-family: $font;
+    @include items-grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    .country-list-item{
+        @include set-padding-margin(15px, 15px);
+        font-size: $basic-font-size;
+        background: #2e2b2b;
+        position: relative;
+        color: white;
+        width: clamp(200px, 300px, 400px);
+        height: clamp(340px, 450px, 560px);
+        border-radius: 0px 15px 15px 15px;
+        border: 1px solid black;
+        overflow: hidden;
+        .country-data-wrapper,
+        .country-flag-wrapper{
+            @include items-grid;
+            p, h4{
+                text-align: justify;
+                @include set-padding-margin(2px, 0);
+            }
+            h2{
+                text-align: center;
+            }
+            img{
+                width: 100px;
+            }
+        }
+    }
+    .country-danger{
+        @include items-flex;
+        transform: rotate(-45deg);
+        content: '';
+        width: 150px;
+        height: 150px;
+        margin: -110px;
+        color: black;
+    }
+    .country-details{
+        @include items-flex;
+        font-size: $basic-font-size;
+        align-items: center;
+        text-decoration: none;
+        color: black;
+        bottom: 0;
+        left:0;
+        height: 15%;
+        width: 100%;
+    }
+}
