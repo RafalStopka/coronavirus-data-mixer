@@ -1,10 +1,25 @@
-<form>
-  <label for="date">Data from: </label>
-  <input type="date" name="date" [formControl]="date" min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}">
-</form>
-<div style="display: block;">
-    <canvas baseChart width="1800" height="800"
-      [data]="config.pieChartData"
+<div style="display: inline-block;">
+  <form>
+    <label for="date">Data from: </label>
+    <input type="date" name="date" [formControl]="firstDate" min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}">
+    <label for="compare">Compare dates </label>
+    <input type="checkbox" name="compare" [formControl]="compare">
+  </form>
+    <canvas baseChart width="600" height="600"
+      [data]="config.firstPieChartData"
+      [labels]="config.pieChartLabels"
+      [options]="config.pieChartOptions"
+      [colors]="config.pieChartColors"
+      [chartType]="'pie'">
+    </canvas>
+</div>
+<div *ngIf="compareDates" style="display: inline-block;">
+  <form>
+    <label for="date">Data from: </label>
+    <input type="date" name="date" [formControl]="secondDate" min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}">
+  </form>
+    <canvas baseChart width="600" height="600"
+      [data]="config.secondPieChartData"
       [labels]="config.pieChartLabels"
       [options]="config.pieChartOptions"
       [colors]="config.pieChartColors"

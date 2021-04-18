@@ -14,7 +14,11 @@ export class PieChartComponent implements OnInit {
   minDate: string = '';
   maxDate: string = '';
 
-  date = new FormControl('');
+  firstDate = new FormControl('');
+  secondDate = new FormControl('');
+  compare = new FormControl('');
+
+  compareDates: boolean = false;
 
   chartColors = [
     {
@@ -32,13 +36,18 @@ export class PieChartComponent implements OnInit {
   }
 
   onDateChange(): void{
-    this.date.valueChanges.subscribe(date =>{
+    this.firstDate.valueChanges.subscribe(date =>{
       date = date.replaceAll('-',' ');
-      this.config.pieChartData = [];
-      console.log(this.config.pieChartData);
+      this.config.firstPieChartData = [];
       const data = this.chartData.data.find((day: any) => day.day == date);
-      this.config.pieChartData = [data.newCases, data.totalCases, data.totalDeaths, data.totalRecovered],
-      console.log(this.config.pieChartData);
+      this.config.firstPieChartData = [data.newCases, data.totalCases, data.totalDeaths, data.totalRecovered];
+    });
+    this.secondDate.valueChanges.subscribe(date=>{
+      date = date.replaceAll('-',' ');
+      this.config.secondPieChartData = [];
+      const data = this.chartData.data.find((day: any) => day.day == date);
+      console.log(data);
+      this.config.secondPieChartData = [data.newCases, data.totalCases, data.totalDeaths, data.totalRecovered];
     })
   }
 
@@ -51,21 +60,28 @@ export class PieChartComponent implements OnInit {
     return `${year} ${month} ${day}`
   }
 
-  setLimitsForInput(){
-    this.maxDate = this.getYesterdaysDate(true);
-    this.minDate = this.chartData.data[0].day.replaceAll(' ', '-');
-    console.log(this.minDate);
+  getFirstDayDate(withDashes: boolean): string{
+    if(withDashes) this.chartData.data[0].day.replaceAll(' ', '-');
+    return this.chartData.data[0].day;
   }
 
-  ngOnInit(): void {
-    
-    this.onDateChange();
-    this.setLimitsForInput();
+  setLimitsForInput(){
+    this.maxDate = this.getYesterdaysDate(true);
+    this.minDate = this.getFirstDayDate(true);
+  }
 
-    const data = this.chartData.data.find((day: any) => day.day == this.getYesterdaysDate(false));
+  toggleDateCompareFlag(){
+    this.compare.valueChanges.subscribe(value=>{
+      this.compareDates = value;
+    })
+  }
 
-    this.config = {
-      pieChartData: [data.newCases, data.totalCases, data.totalDeaths, data.totalRecovered],
+  getConfig(){
+    const firstChartData = this.chartData.data.find((day: any) => day.day == this.getYesterdaysDate(false));
+    const secondCharttData = this.chartData.data.find((day: any) => day.day == this.getFirstDayDate(false));
+    return {
+      firstPieChartData: [firstChartData.newCases, firstChartData.totalCases, firstChartData.totalDeaths, firstChartData.totalRecovered],
+      secondPieChartData: [secondCharttData.newCases, secondCharttData.totalCases, secondCharttData.totalDeaths, secondCharttData.totalRecovered],
       pieChartOptions: {
         responsive: true,
         legend:{
@@ -77,6 +93,14 @@ export class PieChartComponent implements OnInit {
       pieChartType: 'pie',
     }
   }
-  
 
+  ngOnInit(): void {
+    this.firstDate.patchValue(this.getYesterdaysDate(true));
+    this.secondDate.patchValue(this.chartData.data[0].day.replaceAll(' ', '-'));
+    this.config = this.getConfig();
+
+    this.onDateChange();
+    this.setLimitsForInput();
+    this.toggleDateCompareFlag();
+  }
 }
