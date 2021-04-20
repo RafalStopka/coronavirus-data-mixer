@@ -1,9 +1,19 @@
-<div class="chart-wrapper">
-    <canvas baseChart width="1800" height="800"
-      [datasets]="config.lineChartData"
-      [labels]="config.lineChartLabels"
-      [options]="config.lineChartOptions"
-      [colors]="config.lineChartColors"
-      [chartType]="'line'">
-    </canvas>
+<div class="chart-flex-wrapper">
+  <div class="chart-wrapper">
+    <form [formGroup]="dateForm">
+      <label for="date">Data from: </label>
+      <input type="date" name="date" formControlName="firstDate" min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}">
+      <label for="date">Data to: </label>
+      <input type="date" name="date" formControlName="secondDate" min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}">
+      <button (click)="restoreDefault()">Restore default</button>
+    </form>
+      <canvas baseChart width="1800" height="800"
+        [datasets]="config.lineChartData"
+        [labels]="config.lineChartLabels"
+        [options]="config.lineChartOptions"
+        [colors]="config.lineChartColors"
+        [chartType]="'line'">
+      </canvas>
+  </div>
 </div>
+

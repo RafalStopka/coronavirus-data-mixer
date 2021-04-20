@@ -7,4 +7,10 @@
     display: inline-block;
     margin: 15px;
     padding: 15px;
+    text-align: center;
+    form{
+        label{
+            margin: 0 15px;
+        }
+    }
 }
