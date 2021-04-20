@@ -2,9 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
-};
+export const config = {
+  "apiURL":  "https://covid-193.p.rapidapi.com/",
+  "rapidAPIKey": "c37be5d850mshff9d4ae5e692bb0p127b26jsnc687d188d287",
+  "rapidAPIHost": "covid-193.p.rapidapi.com",
+  production: true,
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
