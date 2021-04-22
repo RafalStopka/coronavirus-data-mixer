@@ -18,7 +18,18 @@ $basic-font-size: 1.3em;
     margin: $margin;
 }
 
+.country-list-grey{
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 5;
+    background: rgba(25, 27, 31, 0.8);
+    width: 100%;
+    height: 100%;
+}
+
 .country-list-wrapper{
+    position: relative;
     font-family: $font;
     @include items-grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -57,6 +68,10 @@ $basic-font-size: 1.3em;
         height: 150px;
         margin: -110px;
         color: black;
+        &:hover{
+            cursor: pointer;
+            background: black;
+        }
     }
     .country-details{
         @include items-flex;

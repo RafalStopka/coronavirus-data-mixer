@@ -1,0 +1,52 @@
+.modal{
+    position: fixed;
+    left: 50%;
+    top: 20%;
+    width: 0;
+    height: 35px;
+    color: white;
+    background: #2e2b2b;
+    z-index: 10;
+    padding: 15px;
+    border: solid black 3px;
+    transform: translate(-50%, 20%);
+    animation-duration: 1s;
+    animation-name: showModal;
+    animation-fill-mode: forwards;
+    font-size: 0;
+    &-close{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    ul{
+        font-size: inherit;
+        list-style-type: none;
+        li::before{ content: '■'; }
+        li:first-child::before{ color: green }
+        li:nth-child(2)::before{ color: yellow }
+        li:nth-child(3)::before{ color: orange }
+        li:last-child::before{ color: red }
+    }
+}
+
+@keyframes showModal {
+    from {
+        width: 0;
+        font-size: 0;
+        height: 35px;
+    }
+    50%{
+        width: 30%;
+        font-size: 0;
+        height: 35px;
+    }
+    to{
+        width: 30%;
+        font-size: 1.4rem;;
+        height: 40%;
+    }
+}

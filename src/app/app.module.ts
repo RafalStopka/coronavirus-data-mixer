@@ -16,6 +16,7 @@ import { LineChartComponent } from './line-chart/line-chart.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
 import 'chartjs-plugin-zoom';
+import { CountryInfoModalComponent } from './country-info-modal/country-info-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import 'chartjs-plugin-zoom';
     PieChartComponent,
     NavbarComponent,
     PageNotFoundComponent,
-    LineChartComponent
+    LineChartComponent,
+    CountryInfoModalComponent
   ],
   imports: [
     BrowserModule,
