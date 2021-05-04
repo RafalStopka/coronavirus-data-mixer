@@ -77,6 +77,47 @@ export class DataTransformerService {
     }
   }
 
+  prepareConfigForBarChart(countryData: any[]){
+    let chartData: any = {
+      data: [
+        {data: [], label: 'New cases'},
+        {data: [], label: 'Total cases'},
+        {data: [], label: 'Total deaths'},
+        {data: [], label: 'Total recovered'},
+      ],
+      labels: [],
+      ready: false,
+    }
+    const uniqueMonthYear: any = [];
+    countryData.forEach((day: any)=>{
+      const month = day.day.slice(5,7);
+      const year = day.day.slice(0,4);
+      const monthYear = `${month} ${year}`;
+      if(!uniqueMonthYear[monthYear]?.newCases.length) uniqueMonthYear[monthYear] = {
+        newCases: 0,
+        totalCases: 0,
+        totalDeaths: 0,
+        totalRecovered: 0,
+        label: monthYear,
+      };
+      uniqueMonthYear[monthYear].newCases += day.newCases
+      uniqueMonthYear[monthYear].totalCases += day.totalCases
+      uniqueMonthYear[monthYear].totalDeaths += day.totalDeaths
+      uniqueMonthYear[monthYear].totalRecovered += day.totalRecovered
+    });
+    const monthsYearsArray = (Object.keys(uniqueMonthYear));
+    for(let i = 0; i < monthsYearsArray.length; i++){
+      const monthYear = uniqueMonthYear[(monthsYearsArray[i])]
+      chartData.data[0].data.push(monthYear.newCases)
+      chartData.data[1].data.push(monthYear.totalCases)
+      chartData.data[2].data.push(monthYear.totalDeaths)
+      chartData.data[3].data.push(monthYear.totalRecovered)
+      chartData.labels.push(monthYear.label)
+    };
+    chartData.ready = true;
+    return chartData;
+  }
+
   prepareConfigForLineChart(countryData: any[]){
     const newCases: number[] = [];
     const totalCases: number[] = [];

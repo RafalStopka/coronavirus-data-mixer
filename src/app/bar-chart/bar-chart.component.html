@@ -1,1 +1,11 @@
-<p>bar-chart works!</p>
+<div class="chart-flex-wrapper">
+    <div class="chart-wrapper">
+        <canvas baseChart width="1800" height="800"
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [chartType]="'bar'">
+      </canvas>
+    </div>
+</div>>

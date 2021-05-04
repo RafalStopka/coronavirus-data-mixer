@@ -14,6 +14,7 @@ export class CountryComponent implements OnInit {
   ISO: string | null = '';
   lineChartData: any = [];
   pieChartData: any = [];
+  barChartData: any = [];
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private dataTransformer: DataTransformerService) {
     this.countryName = this.route.snapshot.paramMap.get('country');
@@ -21,6 +22,7 @@ export class CountryComponent implements OnInit {
       const countryData = this.dataTransformer.prepareDataForChart(data.response);
       this.lineChartData = this.dataTransformer.prepareConfigForLineChart(countryData);
       this.pieChartData = this.dataTransformer.prepareConfigForPieChart(countryData);
+      this.barChartData = this.dataTransformer.prepareConfigForBarChart(countryData);
     });
   }
 
